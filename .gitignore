@@ -283,4 +283,4 @@ nomadgram/media/
 
 .pytest_cache/
 
-
+migrations/
