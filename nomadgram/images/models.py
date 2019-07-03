@@ -1,4 +1,5 @@
 from django.db import models
+from nomadgram.users import models as user_model
 
 # Create your models here.
 
@@ -12,10 +13,25 @@ class TimeStampedModel(models.Model):
 
 class Image(TimeStampedModel):
 
+    """ Image model """
+
     file = models.ImageField()
     location = models.CharField(max_length = 140)
     caption = models.TextField()
+    creator = models.ForeignKey(user_model.User, on_delete = models.CASCADE, null = True)
 
 class Comment(TimeStampedModel):
 
+    """ Comment model """
+
     message = models.TextField()
+    creator = models.ForeignKey(user_model.User, on_delete = models.CASCADE, null = True)
+    image = models.ForeignKey(Image, on_delete = models.CASCADE, null = True)
+
+
+class Like(TimeStampedModel):
+
+    """ Like model """
+
+    creator = models.ForeignKey(user_model.User, on_delete = models.CASCADE, null = True)
+    image = models.ForeignKey(Image, on_delete = models.CASCADE, null = True)
