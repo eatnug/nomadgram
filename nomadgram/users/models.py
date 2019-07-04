@@ -23,8 +23,25 @@ class User(AbstractUser):
     phone = models.CharField(max_length=140, null=True)
     gender = models.CharField(max_length=80,choices=GENDER_CHOICES, null=True)
     followers = models.ManyToManyField("self", blank=True)
-    followings = models.ManyToManyField("self", blank=True)
+    following = models.ManyToManyField("self", blank=True)
 
+
+    def __str__(self):
+        return self.username
+
+    @property
+    def post_count(self):
+        return self.images.all().count()
+
+    @property
+    def followers_count(self):
+        return self.followers.all().count()
+
+    @property
+    def following_count(self):
+        return self.following.all().count()
+
+    
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})
