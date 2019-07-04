@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "rest_framework",
+    "taggit",
 ]
 
 LOCAL_APPS = [
@@ -263,3 +264,6 @@ SOCIALACCOUNT_ADAPTER = "nomadgram.users.adapters.SocialAccountAdapter"
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+#taggit ignores case diff
+TAGGIT_CASE_INSENSITIVE = True      
