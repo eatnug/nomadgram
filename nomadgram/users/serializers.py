@@ -1,11 +1,25 @@
 from rest_framework import serializers
 from . import models
-from nomadgram.images import serializers as image_serializer
+from nomadgram.images import serializers as image_serializers
 
-class ExploreUserSerializer(serializers.ModelSerializer):
+class UserProfileSerializer(serializers.ModelSerializer):
 
-    followings = image_serializer.FeedUserSerializer(many=True)
-    followers = image_serializer.FeedUserSerializer(many=True)
+    images = image_serializers.UserProfilePostSerializer(many=True)
+
+    class Meta:
+        model = models.User
+        fields = (
+            'username',
+            'name',
+            'bio',
+            'website',
+            'post_count',
+            'followers_count',
+            'following_count',
+            'images',
+        )
+
+class ListUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
@@ -14,6 +28,4 @@ class ExploreUserSerializer(serializers.ModelSerializer):
             'profile_image',
             'username',
             'name',
-            'followings',
-            'followers'
         )
